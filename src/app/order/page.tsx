@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Plus, Minus, ShoppingCart } from "lucide-react";
-import { OrderItem, CustomerInfo } from "@/types";
+import { OrderItem, CustomerInfo } from "../../types";
 
 // 임시 제품 데이터
 const products = [
