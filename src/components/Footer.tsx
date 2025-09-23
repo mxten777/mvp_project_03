@@ -4,6 +4,7 @@ import React, { useEffect, useRef } from "react";
 // 네이버 지도 타입 선언 (window.naver)
 declare global {
   interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     naver: any;
   }
 }
