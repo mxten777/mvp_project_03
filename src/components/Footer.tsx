@@ -8,6 +8,19 @@ export default function Footer() {
           <span>용인시 기흥구 지곡동 381-6</span>
         </div>
       </div>
+      <div className="max-w-7xl mx-auto pb-8 px-4">
+        <div className="w-full h-64 rounded-lg overflow-hidden border mt-4">
+          <iframe
+            title="네이버 지도"
+            src="https://map.naver.com/v5/entry/place/13490206?c=15,0,0,0,dh"
+            width="100%"
+            height="100%"
+            frameBorder="0"
+            style={{ border: 0 }}
+            allowFullScreen
+          ></iframe>
+        </div>
+      </div>
     </footer>
   );
 }
