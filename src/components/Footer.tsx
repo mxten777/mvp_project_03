@@ -19,7 +19,7 @@ export default function Footer() {
       const script = document.createElement("script");
       script.id = scriptId;
       // 실제 발급받은 Client ID로 교체
-      script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=ncp_iam_BPKMKRP4VJIWU2SyUONYp1u2LMl7eNTbuC`;
+  script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=hsssqn2ub5`;
       script.async = true;
       script.onload = () => {
         if (window.naver && mapRef.current) {
