@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useRef } from "react";
 
 // 네이버 지도 타입 선언 (window.naver)
