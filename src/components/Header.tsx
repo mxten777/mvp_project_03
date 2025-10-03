@@ -5,11 +5,14 @@ import { useState } from "react";
 import { Menu, X, Phone, Mail } from "lucide-react";
 
 const navigation = [
-  { name: "홈", href: "/" },
-  { name: "회사소개", href: "/about" },
-  { name: "제품안내", href: "/products" },
-  { name: "주문하기", href: "/order" },
-  { name: "문의하기", href: "/contact" },
+  { name: "홈", href: "#hero" },
+  { name: "회사소개", href: "#about" },
+  { name: "제품", href: "#products" },
+  { name: "강점", href: "#strength" },
+  { name: "파트너", href: "#partners" },
+  { name: "FAQ", href: "#faq" },
+  { name: "문의", href: "#contact" },
+  { name: "대시보드", href: "#dashboard" },
 ];
 
 export default function Header() {
@@ -55,13 +58,13 @@ export default function Header() {
           {/* Desktop navigation */}
           <nav className="hidden md:flex gap-8 text-base font-medium">
             {navigation.map((item) => (
-              <Link
+              <a
                 key={item.name}
                 href={item.href}
                 className="text-gray-700 hover:text-blue-600 transition-colors duration-200 px-2 py-1 rounded-lg"
               >
                 {item.name}
-              </Link>
+              </a>
             ))}
           </nav>
 
@@ -86,14 +89,14 @@ export default function Header() {
           <div className="md:hidden border-t pt-4 pb-4">
             <nav className="flex flex-col space-y-3">
               {navigation.map((item) => (
-                <Link
+                <a
                   key={item.name}
                   href={item.href}
                   className="text-gray-700 hover:text-blue-900 font-medium py-2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {item.name}
-                </Link>
+                </a>
               ))}
             </nav>
           </div>

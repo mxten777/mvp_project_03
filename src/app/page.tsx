@@ -6,6 +6,7 @@ import PartnerSection from "../components/PartnerSection";
 import CTASection from "../components/CTASection";
 import FAQSection from "../components/FAQSection";
 import ContactSection from "../components/ContactSection";
+import DashboardSection from "../components/DashboardSection";
 export default function Home() {
   return (
     <>
@@ -17,6 +18,7 @@ export default function Home() {
       <CTASection />
       <FAQSection />
       <ContactSection />
+      <DashboardSection />
     </>
   );
 }
