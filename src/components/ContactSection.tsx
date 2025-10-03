@@ -1,4 +1,5 @@
 
+"use client";
 
 import React, { useState } from "react";
 import { FaUser, FaBuilding, FaEnvelope, FaCommentDots } from "react-icons/fa";
