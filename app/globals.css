@@ -5,3 +5,18 @@
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Header offset to prevent fixed header from overlapping content */
+:root {
+  --header-offset: 100px;
+}
+
+html {
+  scroll-padding-top: var(--header-offset);
+  scroll-behavior: smooth;
+}
+
+/* Push page content below the fixed header */
+body {
+  padding-top: var(--header-offset);
+}

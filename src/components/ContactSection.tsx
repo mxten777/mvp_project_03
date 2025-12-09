@@ -1,8 +1,8 @@
-
 "use client";
 
 import React, { useState } from "react";
-import { FaUser, FaBuilding, FaEnvelope, FaCommentDots } from "react-icons/fa";
+import { motion } from "framer-motion";
+import { User, Building, Mail, MessageSquare, Send } from "lucide-react";
 
 export default function ContactSection() {
   const [form, setForm] = useState({
@@ -24,42 +24,126 @@ export default function ContactSection() {
   };
 
   return (
-  <section id="contact" className="py-20 bg-gradient-to-br from-accent/10 via-white to-primary/10 animate-fadein">
-    <div className="max-w-3xl mx-auto px-4">
-      <h2 className="text-3xl md:text-4xl font-extrabold text-primary text-center mb-6">문의/상담</h2>
-      <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow-accent p-4 sm:p-8 space-y-6 border-2 border-accent/30 hover:scale-105 transition-all duration-300 w-full relative animate-fadein-card">
-        <span className="absolute top-4 right-4 bg-accent text-white text-xs font-bold px-3 py-1 rounded-full shadow-btn animate-bounce">상담</span>
-        <div className="flex items-center gap-2">
-          <FaUser className="text-primary text-lg drop-shadow" />
-          <label className="block text-sm font-semibold text-gray-700 mb-2">이름</label>
+    <section id="contact" className="py-20 bg-gradient-to-br from-accent/10 via-white to-primary/10 scroll-mt-24">
+      <div className="max-w-3xl mx-auto px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h2 className="text-3xl md:text-4xl font-extrabold text-primary mb-4">문의/상담</h2>
+          <p className="text-gray-600">냉매 및 부자재 공급에 대한 문의사항을 남겨주세요</p>
+        </motion.div>
+
+        <motion.form
+          onSubmit={handleSubmit}
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="card-premium p-8 space-y-6"
+        >
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <User className="w-5 h-5 text-blue-600" />
+              <label className="block text-sm font-semibold text-gray-700">이름</label>
+            </div>
+            <input
+              type="text"
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              required
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+              placeholder="이름을 입력하세요"
+            />
+          </div>
+
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <Building className="w-5 h-5 text-purple-600" />
+              <label className="block text-sm font-semibold text-gray-700">회사명</label>
+            </div>
+            <input
+              type="text"
+              name="company"
+              value={form.company}
+              onChange={handleChange}
+              required
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+              placeholder="회사명을 입력하세요"
+            />
+          </div>
+
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <Mail className="w-5 h-5 text-green-600" />
+              <label className="block text-sm font-semibold text-gray-700">이메일</label>
+            </div>
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              required
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+              placeholder="이메일을 입력하세요"
+            />
+          </div>
+
+          <div>
+            <div className="flex items-center gap-2 mb-2">
+              <MessageSquare className="w-5 h-5 text-orange-600" />
+              <label className="block text-sm font-semibold text-gray-700">문의 내용</label>
+            </div>
+            <textarea
+              name="message"
+              value={form.message}
+              onChange={handleChange}
+              rows={5}
+              required
+              className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all resize-none"
+              placeholder="문의 내용을 입력하세요"
+            />
+          </div>
+
+          <motion.button
+            type="submit"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full btn-primary flex items-center justify-center gap-2 py-4"
+          >
+            <Send className="w-5 h-5" />
+            문의하기
+          </motion.button>
+        </motion.form>
+
+        {submitted && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="mt-8 card-premium p-6 text-center"
+          >
+            <div className="text-green-600 text-lg font-semibold mb-2">
+              문의가 정상적으로 접수되었습니다.
+            </div>
+            <div className="text-gray-600">
+              빠른 시일 내에 연락드리겠습니다.
+            </div>
+          </motion.div>
+        )}
+
+        <div className="mt-8 text-center text-gray-600">
+          <p className="mb-2">직접 문의하시려면</p>
+          <p>
+            대표번호: <span className="font-semibold text-blue-600">02-1234-5678</span>
+            {" | "}
+            이메일: <span className="font-semibold text-blue-600">info@corp.com</span>
+          </p>
         </div>
-        <input type="text" name="name" value={form.name} onChange={handleChange} required className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="이름을 입력하세요" />
-        <div className="flex items-center gap-2">
-          <FaBuilding className="text-secondary text-lg drop-shadow" />
-          <label className="block text-sm font-semibold text-gray-700 mb-2">회사명</label>
-        </div>
-        <input type="text" name="company" value={form.company} onChange={handleChange} required className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="회사명을 입력하세요" />
-        <div className="flex items-center gap-2">
-          <FaEnvelope className="text-accent text-lg drop-shadow" />
-          <label className="block text-sm font-semibold text-gray-700 mb-2">이메일</label>
-        </div>
-        <input type="email" name="email" value={form.email} onChange={handleChange} required className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="이메일을 입력하세요" />
-        <div className="flex items-center gap-2">
-          <FaCommentDots className="text-success text-lg drop-shadow" />
-          <label className="block text-sm font-semibold text-gray-700 mb-2">문의 내용</label>
-        </div>
-        <textarea name="message" value={form.message} onChange={handleChange} rows={4} required className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary" placeholder="문의 내용을 입력하세요" />
-  <button type="submit" className="w-full py-3 bg-accent text-white font-bold rounded-full shadow-btn hover:bg-success transition-all duration-200 animate-bounce hover:animate-none">문의하기</button>
-      </form>
-      {submitted && (
-        <div className="mt-8 bg-gradient-to-br from-primary/10 via-white to-accent/10 text-accent rounded-2xl p-8 text-center font-semibold shadow-accent">
-          문의가 정상적으로 접수되었습니다.<br />빠른 시일 내에 연락드리겠습니다.
-        </div>
-      )}
-      <div className="mt-8 text-center text-gray-500 text-sm">
-        대표번호: <span className="font-semibold text-primary">02-1234-5678</span> | 이메일: <span className="font-semibold text-primary">info@corp.com</span>
       </div>
-    </div>
-  </section>
+    </section>
   );
 }

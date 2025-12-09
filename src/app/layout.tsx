@@ -36,7 +36,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-gradient-to-br from-blue-50 to-white text-gray-900`}
       >
         <Header />
-        <main className="min-h-screen max-w-7xl mx-auto px-4 py-8">
+        <main className="min-h-screen">
           {children}
         </main>
         <Footer />
