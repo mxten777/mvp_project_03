@@ -4,9 +4,17 @@ import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Linkedin } from "lucide-react";
 import { useEffect, useRef } from "react";
 
+interface NaverMap {
+  Map: new (element: HTMLElement, options: { center: { lat: number; lng: number }; zoom: number }) => unknown;
+  LatLng: new (lat: number, lng: number) => { lat: number; lng: number };
+  Marker: new (options: { position: { lat: number; lng: number }; map: unknown }) => unknown;
+}
+
 declare global {
   interface Window {
-    naver: any;
+    naver?: {
+      maps?: NaverMap;
+    };
   }
 }
 
@@ -21,7 +29,7 @@ export default function Footer() {
       script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=hsssqn2ub5`;
       script.async = true;
       script.onload = () => {
-        if (window.naver && mapRef.current) {
+        if (window.naver?.maps && mapRef.current) {
           try {
             const map = new window.naver.maps.Map(mapRef.current, {
               center: new window.naver.maps.LatLng(37.2753, 127.1291),
@@ -38,7 +46,7 @@ export default function Footer() {
       };
       document.body.appendChild(script);
     } else {
-      if (window.naver && mapRef.current) {
+      if (window.naver?.maps && mapRef.current) {
         try {
           const map = new window.naver.maps.Map(mapRef.current, {
             center: new window.naver.maps.LatLng(37.2753, 127.1291),
