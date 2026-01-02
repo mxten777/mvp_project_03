@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { User, Building, Mail, MessageSquare, Send } from "lucide-react";
 
 export default function ContactSection() {
@@ -26,25 +25,12 @@ export default function ContactSection() {
   return (
     <section id="contact" className="py-20 bg-gradient-to-br from-accent/10 via-white to-primary/10 scroll-mt-24">
       <div className="max-w-3xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-extrabold text-primary mb-4">문의/상담</h2>
           <p className="text-gray-600">냉매 및 부자재 공급에 대한 문의사항을 남겨주세요</p>
-        </motion.div>
+        </div>
 
-        <motion.form
-          onSubmit={handleSubmit}
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-          className="card-premium p-8 space-y-6"
-        >
+        <form onSubmit={handleSubmit} className="card-premium p-8 space-y-6">
           <div>
             <div className="flex items-center gap-2 mb-2">
               <User className="w-5 h-5 text-blue-600" />
@@ -63,7 +49,7 @@ export default function ContactSection() {
 
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <Building className="w-5 h-5 text-purple-600" />
+              <Building className="w-5 h-5 text-blue-600" />
               <label className="block text-sm font-semibold text-gray-700">회사명</label>
             </div>
             <input
@@ -109,30 +95,17 @@ export default function ContactSection() {
             />
           </div>
 
-          <motion.button
-            type="submit"
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            className="w-full btn-primary flex items-center justify-center gap-2 py-4"
-          >
+          <button type="submit" className="w-full btn-primary flex items-center justify-center gap-2 py-4">
             <Send className="w-5 h-5" />
             문의하기
-          </motion.button>
-        </motion.form>
+          </button>
+        </form>
 
         {submitted && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            className="mt-8 card-premium p-6 text-center"
-          >
-            <div className="text-green-600 text-lg font-semibold mb-2">
-              문의가 정상적으로 접수되었습니다.
-            </div>
-            <div className="text-gray-600">
-              빠른 시일 내에 연락드리겠습니다.
-            </div>
-          </motion.div>
+          <div className="mt-8 card-premium p-6 text-center">
+            <div className="text-green-600 text-lg font-semibold mb-2">문의가 정상적으로 접수되었습니다.</div>
+            <div className="text-gray-600">빠른 시일 내에 연락드리겠습니다.</div>
+          </div>
         )}
 
         <div className="mt-8 text-center text-gray-600">

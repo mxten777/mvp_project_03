@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { HelpCircle, Truck, Award, DollarSign, MessageCircle } from "lucide-react";
 
 const faqs = [
@@ -21,9 +20,9 @@ const faqs = [
   {
     q: "대량 구매/장기 거래 시 혜택이 있나요?",
     a: "대량 구매 및 장기 거래 고객에게는 특별 할인과 맞춤 견적을 제공합니다.",
-    icon: <DollarSign className="w-8 h-8 text-purple-600" />,
+    icon: <DollarSign className="w-8 h-8 text-blue-600" />,
     badge: "혜택",
-    color: "from-purple-500 to-purple-600"
+    color: "from-blue-500 to-blue-600"
   },
   {
     q: "상담/문의는 어떻게 하나요?",
@@ -38,32 +37,18 @@ export default function FAQSection() {
   return (
   <section id="faq" className="py-20 bg-gradient-to-br from-primary/10 via-white to-accent/10 animate-fadein scroll-mt-24">
       <div className="max-w-4xl mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
+        <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold mb-6">
             <HelpCircle className="w-4 h-4" />
             자주 묻는 질문
           </div>
           <h2 className="text-3xl md:text-4xl font-extrabold text-primary text-center mb-6">궁금하신 점을 해결해드립니다</h2>
-        </motion.div>
+        </div>
   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {faqs.map((item, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: idx * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ y: -4 }}
-              className="card-premium p-6 group"
-            >
+            <div key={idx} className="card-premium p-6 group">
               <div className="flex items-start gap-4">
-                <div className={`flex-shrink-0 w-12 h-12 bg-gradient-to-r ${item.color} rounded-xl flex items-center justify-center shadow-lg transform group-hover:scale-110 transition-transform`}>
+                <div className={`flex-shrink-0 w-12 h-12 bg-gradient-to-r ${item.color} rounded-xl flex items-center justify-center shadow-lg`}>
                   {item.icon}
                 </div>
                 <div className="flex-1">
@@ -76,7 +61,7 @@ export default function FAQSection() {
                   <div className="text-gray-700 text-sm leading-relaxed">{item.a}</div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

@@ -18,9 +18,9 @@ const strengths = [
   {
     title: "맞춤형 서비스",
     desc: "고객 니즈에 맞춘 제품 추천과 전문 상담 지원.",
-    icon: <Users className="w-12 h-12 text-purple-600" />,
+    icon: <Users className="w-12 h-12 text-blue-600" />,
     badge: "서비스",
-    color: "from-purple-500 to-purple-600"
+    color: "from-blue-500 to-blue-600"
   },
   {
     title: "합리적 가격",
@@ -47,12 +47,12 @@ export default function StrengthSection() {
           {strengths.map((item, idx) => (
             <div
               key={idx}
-              className="card-premium p-6 sm:p-8 text-center group hover:-translate-y-2 transition-all duration-300"
+              className="card-premium p-6 sm:p-8 text-center group transition-colors duration-200"
             >
               <div className={`inline-block bg-gradient-to-r ${item.color} text-white text-xs font-bold px-4 py-2 rounded-full mb-4`}>
                 {item.badge}
               </div>
-              <div className="mb-4 flex justify-center transform group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
+              <div className="mb-4 flex justify-center">{item.icon}</div>
               <div className="text-xl font-bold text-primary mb-2 font-display">
                 {item.title}
               </div>

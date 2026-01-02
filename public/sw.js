@@ -7,7 +7,7 @@ self.addEventListener('activate', () => {
   console.log('Service Worker activated');  
 });
 
-self.addEventListener('fetch', (event) => {
+self.addEventListener('fetch', () => {
   // Pass through all requests
   return;
 });

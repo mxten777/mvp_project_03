@@ -40,7 +40,7 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-gradient-to-r from-blue-600 via-blue-700 to-purple-700 text-white px-8 py-3.5 rounded-xl font-bold shadow-xl hover:shadow-2xl transition-all duration-300 hover:scale-[1.02] focus:ring-4 focus:ring-blue-300 active:scale-95;
+    @apply bg-gradient-to-r from-blue-600 via-blue-700 to-blue-800 text-white px-8 py-3.5 rounded-xl font-bold shadow-xl transition-colors duration-300 focus:ring-4 focus:ring-blue-300;
   }
 
   .btn-secondary {
@@ -52,7 +52,7 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent;
   }
 
   .glass-effect {
@@ -76,13 +76,7 @@
     text-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
   }
 
-  .animate-float {
-    animation: float 8s ease-in-out infinite;
-  }
-
-  .animate-float-slow {
-    animation: float 12s ease-in-out infinite;
-  }
+  /* Removed complex float animations - keep only opacity-based animations per KETRI */
 
   @keyframes float {
     0%, 100% { 
@@ -97,28 +91,19 @@
   }
 
   .animate-fadein {
-    animation: fadein 0.8s ease-out forwards;
+    animation: fadein 0.6s ease-out forwards;
   }
 
   @keyframes fadein {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   .animate-pulse-slow {
     animation: pulse 5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   }
 
-  .animate-gradient {
-    animation: gradient 8s ease infinite;
-    background-size: 200% 200%;
-  }
+  /* Removed gradient animation to keep palette stable */
 
   @keyframes gradient {
     0%, 100% { background-position: 0% 50%; }
@@ -150,11 +135,11 @@
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb {
-    background: linear-gradient(to bottom, #3b82f6, #8b5cf6);
+    background: linear-gradient(to bottom, #3b82f6, #1e40af);
     border-radius: 10px;
   }
 
   .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(to bottom, #2563eb, #7c3aed);
+    background: linear-gradient(to bottom, #2563eb, #1e40af);
   }
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { MapPin, Phone, Mail, Clock, Facebook, Instagram, Linkedin } from "lucide-react";
 import { useEffect, useRef } from "react";
 
@@ -23,29 +22,16 @@ export default function Footer() {
 
   useEffect(() => {
     const scriptId = "naver-map-script";
-    if (!document.getElementById(scriptId)) {
-      const script = document.createElement("script");
-      script.id = scriptId;
-      script.src = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=hsssqn2ub5`;
-      script.async = true;
-      script.onload = () => {
-        if (window.naver?.maps && mapRef.current) {
-          try {
-            const map = new window.naver.maps.Map(mapRef.current, {
-              center: new window.naver.maps.LatLng(37.2753, 127.1291),
-              zoom: 16,
-            });
-            new window.naver.maps.Marker({
-              position: new window.naver.maps.LatLng(37.2753, 127.1291),
-              map,
-            });
-          } catch (e) {
-            console.error("지도 생성 오류:", e);
-          }
-        }
-      };
-      document.body.appendChild(script);
-    } else {
+    // Prefer public env var for client id (Next.js: NEXT_PUBLIC_NAVER_MAP_CLIENT_ID)
+    const clientId = process.env.NEXT_PUBLIC_NAVER_MAP_CLIENT_ID || "";
+    if (!clientId) {
+      console.error("Naver Maps client id is not set. Set NEXT_PUBLIC_NAVER_MAP_CLIENT_ID in environment.");
+      return;
+    }
+
+    const src = `https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${clientId}`;
+
+    function createMapIfReady() {
       if (window.naver?.maps && mapRef.current) {
         try {
           const map = new window.naver.maps.Map(mapRef.current, {
@@ -60,6 +46,23 @@ export default function Footer() {
           console.error("지도 생성 오류:", e);
         }
       }
+    }
+
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.src = src;
+      script.async = true;
+      script.onload = () => {
+        createMapIfReady();
+      };
+      script.onerror = (e) => {
+        console.error("Naver Maps script failed to load:", e, src);
+      };
+      document.body.appendChild(script);
+    } else {
+      // script already present — try to create map immediately
+      createMapIfReady();
     }
   }, []);
 
@@ -84,18 +87,13 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* 회사 정보 */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <div>
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
                 <span className="text-white font-bold text-xl">K</span>
               </div>
               <div>
-                <h3 className="text-2xl font-black bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+                <h3 className="text-2xl font-black text-white">
                   한국코프론
                 </h3>
                 <p className="text-xs text-blue-300">B2B 냉매 전문</p>
@@ -107,25 +105,15 @@ export default function Footer() {
             </p>
             <div className="flex gap-3">
               {[Facebook, Instagram, Linkedin].map((Icon, idx) => (
-                <motion.a
-                  key={idx}
-                  href="#"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-colors border border-white/20"
-                >
+                <a key={idx} href="#" className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded-lg flex items-center justify-center transition-colors border border-white/20">
                   <Icon className="w-5 h-5" />
-                </motion.a>
+                </a>
               ))}
             </div>
-          </motion.div>
+          </div>
 
           {/* 빠른 링크 */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            viewport={{ once: true }}
-          >
+          <div>
             <h4 className="text-lg font-bold mb-6 text-white">빠른 링크</h4>
             <ul className="space-y-3">
               {quickLinks.map((link, idx) => (
@@ -140,23 +128,17 @@ export default function Footer() {
                 </li>
               ))}
             </ul>
-          </motion.div>
+          </div>
 
           {/* 연락처 정보 */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="lg:col-span-2"
-          >
+          <div className="lg:col-span-2">
             <h4 className="text-lg font-bold mb-6 text-white">연락처</h4>
             <div className="grid sm:grid-cols-2 gap-4">
               {contactInfo.map((item, idx) => {
                 const Icon = item.icon;
                 return (
                   <div key={idx} className="flex items-start gap-3 bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
-                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
+                    <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center flex-shrink-0">
                       <Icon className="w-5 h-5" />
                     </div>
                     <div>
@@ -167,22 +149,16 @@ export default function Footer() {
                 );
               })}
             </div>
-          </motion.div>
+          </div>
         </div>
 
         {/* 지도 */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          viewport={{ once: true }}
-          className="mb-12"
-        >
+        <div className="mb-12">
           <h4 className="text-lg font-bold mb-4 text-white">오시는 길</h4>
           <div className="w-full h-80 rounded-2xl overflow-hidden border-2 border-white/20 shadow-2xl">
             <div ref={mapRef} className="w-full h-full" />
           </div>
-        </motion.div>
+        </div>
 
         {/* 하단 바 */}
         <div className="border-t border-white/10 pt-8">
